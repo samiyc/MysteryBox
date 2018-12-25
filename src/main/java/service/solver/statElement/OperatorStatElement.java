@@ -18,8 +18,10 @@ public class OperatorStatElement {
 
     /**
      * Constructeur
-     *  @param operator MbOperator
-     * @param nbOutputs
+     *
+     * @param operator MbOperator
+     * @param solver LogicSolver
+     * @param nbOutputs Integer
      */
     public OperatorStatElement(MbOperator operator, LogicSolver solver, Integer nbOutputs) {
         infos = new ArrayList<OperatorStatElementInfos>();

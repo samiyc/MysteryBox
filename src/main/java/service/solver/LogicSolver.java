@@ -33,7 +33,6 @@ public class LogicSolver {
             MbOperator mbOperator = new MbOperator(box.getNbInputs() + listOperatorStatElement.size());
             operators.add(mbOperator);
 
-            Integer a, b;
             Integer aTarget = mbOperator.getATarget();
             Integer bTarget = mbOperator.getBTarget();
             OperatorStatElement element = new OperatorStatElement(mbOperator, this, box.getNbOutputs());
@@ -102,13 +101,13 @@ public class LogicSolver {
     public void cleanUp() {
         List<Integer> listMax = new ArrayList<Integer>();
         List<OperatorStatElement> listIdOperatorMaxAccuracy = new ArrayList<OperatorStatElement>();
-        for (int i=1; i <= box.getNbOutputs(); i++) {
-            listMax.set(i, 0);
-            listIdOperatorMaxAccuracy.set(i, null);
+        for (int i=0; i < box.getNbOutputs(); i++) {
+            listMax.add(0);
+            listIdOperatorMaxAccuracy.add(null);
         }
         for (OperatorStatElement elem : listOperatorStatElement) {
             Map<Integer, infosOnInfos> infosMap = elem.generateMapInfos();
-            for (int j=1; j<=box.getNbOutputs(); j++) {
+            for (int j=0; j < box.getNbOutputs(); j++) {
                 infosOnInfos infos = infosMap.get(j);
                 Integer nbNoCall = infos.getNbNoCall();
                 if (nbNoCall > listMax.get(j)) {
@@ -117,9 +116,9 @@ public class LogicSolver {
                 }
             }
         }
-        for (int k=1; k<=box.getNbOutputs(); k++) {
+        for (int k=0; k < box.getNbOutputs(); k++) {
             OperatorStatElement element = listIdOperatorMaxAccuracy.get(k);
-            System.out.println(k + " - max:" + listMax.get(k) + " ose:" + element);
+            System.out.println(k + " - max:" + listMax.get(k) + " use:" + element);
         }
     }
 
