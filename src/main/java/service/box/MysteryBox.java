@@ -3,8 +3,7 @@ package service.box;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.MathUtils.rndBool;
-import static utils.MathUtils.rndNb;
+import static utils.MathUtils.*;
 
 public class MysteryBox {
 
@@ -19,10 +18,10 @@ public class MysteryBox {
     /**
      * Building input, output and operator lists
      */
-    public void init() {
-        nbInputs = rndNb(10, 10);
-        nbOutputs = rndNb(4, 4);
-        nbOperators = rndNb(12, 12);
+    public void init(Integer nbInputs, Integer nbOutputs, Integer nbOperators) {
+        this.nbInputs = nbInputs;
+        this.nbOutputs = nbOutputs;
+        this.nbOperators = nbOperators;
 
         inputs = new ArrayList<Boolean>(nbInputs);
         outputs = new ArrayList<Boolean>(nbOutputs);
@@ -51,21 +50,68 @@ public class MysteryBox {
         }
     }
 
+    /**
+     * Lunch 20 runs and print the values
+     */
+    public void debug() {
+        for (int i=0; i< 20; i++) {
+            run();
+            System.out.println(toString());
+        }
+    }
+
+    /**
+     * Return input and output as string
+     *
+     * @return String
+     */
     @Override
     public String toString() {
-        return "IN:" + outBool(inputs) + " OUT:" + outBool(outputs);
+        return "IN:" + listBoolToString(inputs) + " OUT:" + listBoolToString(outputs);
     }
 
-    private String outBool(List<Boolean> booleans) {
-        StringBuilder retour = new StringBuilder();
-        for(Boolean bool : booleans) {
-            String strBool = bool ? "1" : ".";
-            retour.append(strBool);
-        }
-        return retour.toString();
-    }
-
+    /**
+     * Output the operators
+     */
     public void printOp() {
         System.out.println("OP:" + operators.toString());
+    }
+
+    //****** GETTER SETTER ******
+
+    /**
+     * Getter de nbInputs
+     *
+     * @return Integer
+     */
+    public Integer getNbInputs() {
+        return nbInputs;
+    }
+
+    /**
+     * Getter de nbOutputs
+     *
+     * @return Integer
+     */
+    public Integer getNbOutputs() {
+        return nbOutputs;
+    }
+
+    /**
+     * Getter for inputs
+     *
+     * @return List<Boolean>
+     */
+    public List<Boolean> getInputs() {
+        return inputs;
+    }
+
+    /**
+     * Getter for outputs
+     *
+     * @return List<Boolean>
+     */
+    public List<Boolean> getOutputs() {
+        return outputs;
     }
 }
